@@ -1,0 +1,69 @@
+class MenuItem {
+  String name;
+  double price;
+  String category;
+
+  MenuItem({required this.name, required this.price, required this.category});
+
+  @override
+  String toString() {
+    return 'MenuItem{name: $name, price: $price, category: $category}';
+  }
+}
+
+class Order {
+  String orderId;
+  int tableNumber;
+  List<MenuItem> items;
+  bool isCompleted;
+
+  Order({
+    required this.orderId,
+    required this.tableNumber,
+    List<MenuItem>? items,
+    this.isCompleted = true,
+  }) : items = items ?? [];
+
+  void addItem(MenuItem item) {
+    items.add(item);
+  }
+
+  void removeItem(MenuItem item) {
+    items.remove(item);
+  }
+
+  void completeOrder() {
+    isCompleted = true;
+  }
+
+  @override
+  String toString() {
+    return 'Order{orderId: $orderId, tableNumber: $tableNumber, items: $items, isCompleted: $isCompleted}';
+  }
+}
+
+void main() {
+  // สร้างคำสั่ง
+  var order = Order(orderId: '001', tableNumber: 1);
+
+  // สร้างเมนูอาหาร
+  var tomYum = MenuItem(name: 'ต้มยำกุ้ง', price: 150, category: 'อาหารคาว');
+  var mangoStickyRice = MenuItem(name: 'ข้าวเหนียวมะม่วง', price: 80, category: 'ของหวาน');
+
+  // ทดสอบฟังก์ชัน addItem
+  print('เพิ่มเมนูอาหารในคำสั่ง:');
+  order.addItem(tomYum);
+  order.addItem(mangoStickyRice);
+  print(order);
+
+  // ทดสอบฟังก์ชัน removeItem
+  print('ลบเมนูอาหารออกจากคำสั่ง:');
+  order.removeItem(mangoStickyRice);
+  print(order);
+
+  // ทดสอบฟังก์ชัน completeOrder
+  print('ทำให้คำสั่งเสร็จสมบูรณ์:');
+  order.completeOrder();
+  print(order);
+}
+
